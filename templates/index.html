@@ -8,6 +8,9 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
         .button-container {
             margin-bottom: 10px;
@@ -49,66 +52,48 @@
 </head>
 <body>
     <div class="button-container">
-        <button onclick="insertarSimbolo('+')" title="Suma">+</button>
-        <button onclick="insertarSimbolo('-')" title="Resta">−</button>
-        <button onclick="insertarSimbolo('*')" title="Multiplicación">×</button>
-        <button onclick="insertarSimbolo('/')" title="División">÷</button>
-        <button onclick="insertarSimbolo('^')" title="Potencia">^</button>
-        <button onclick="insertarSimbolo('sqrt()')" title="Raíz cuadrada">√</button>
-        <button onclick="insertarSimbolo('root(n,)')" title="Raíz enésima">ⁿ√</button>
-        <button onclick="insertarSimbolo('pi')" title="Pi">π</button>
-        <button onclick="insertarSimbolo('sin()')" title="Seno">sin</button>
-        <button onclick="insertarSimbolo('cos()')" title="Coseno">cos</button>
-        <button onclick="insertarSimbolo('tan()')" title="Tangente">tan</button>
-        <button onclick="insertarSimbolo('csc()')" title="Cosecante">csc</button>
-        <button onclick="insertarSimbolo('sec()')" title="Secante">sec</button>
-        <button onclick="insertarSimbolo('cot()')" title="Cotangente">cot</button>
-        <button onclick="insertarSimbolo('ln()')" title="Logaritmo natural">ln</button>
-        <button onclick="insertarSimbolo('log()')" title="Logaritmo base 10">log</button>
-        <button onclick="insertarSimbolo('exp()')" title="Exponencial">e^x</button>
-        <button onclick="insertarSimbolo('!')" title="Factorial">n!</button>
-        <button onclick="insertarSimbolo('sinh()')" title="Seno hiperbolico">sinh</button>
-        <button onclick="insertarSimbolo('cosh()')" title="Coseno hiperbolico">cosh</button>
-        <button onclick="insertarSimbolo('tanh()')" title="Tangente hiperbolica">tanh</button>
-        <button onclick="insertarSimbolo('diff(, x)')" title="Derivada">d/dx</button>
-        <button onclick="insertarSimbolo('integrate(, x)')" title="Integral">∫</button>
-        <button onclick="insertarSimbolo('limit(, x, )')" title="Límite">lim</button>
-        <button onclick="insertarSimbolo('sum(, )')" title="Sumatoria">Σ</button>
-        <button onclick="insertarSimbolo('product(, )')" title="Producto">Π</button>
-        <button onclick="insertarSimbolo('abs()')" title="Módulo">|x|</button>
-        <button onclick="insertarSimbolo('()')" title="Paréntesis">( )</button>
-        <button onclick="insertarSimbolo('[]')" title="Corchetes">[ ]</button>
-        <button onclick="insertarSimbolo('{}')" title="Llaves">{ }</button>
-        <button onclick="insertarSimbolo('or')" title="O lógico">∨</button>
-        <button onclick="insertarSimbolo('and')" title="Y lógico">∧</button>
-        <button onclick="insertarSimbolo('not')" title="No lógico">¬</button>
-        <button onclick="insertarSimbolo('==')" title="Igualdad">=</button>
-        <button onclick="insertarSimbolo('!=')" title="Desigualdad">≠</button>
-        <button onclick="insertarSimbolo('<')" title="Menor que"><</button>
-        <button onclick="insertarSimbolo('>')" title="Mayor que">></button>
-        <button onclick="insertarSimbolo('<=')" title="Menor o igual que">≤</button>
-        <button onclick="insertarSimbolo('>=')" title="Mayor o igual que">≥</button>
-        <button onclick="insertarSimbolo('a/b')" title="Fracción">a/b</button>
-        <button onclick="insertarSimbolo('[a, b]')" title="Vector">[a, b]</button>
-        <button onclick="insertarSimbolo('[[a, b], [c, d]]')" title="Matriz">[[a, b], [c, d]]</button>
-        <button onclick="insertarSimbolo('E')" title="Notación científica">E</button>
-        <button onclick="insertarSimbolo('e')" title="Constante e">e</button>
-        <button onclick="insertarSimbolo('phi')" title="Número áureo">φ</button>
-        <button onclick="insertarSimbolo('piecewise([(a, x<0), (b, x>=0)])')" title="Función definida por partes">Funciones por partes</button>
-        <button onclick="insertarSimbolo('in')" title="Pertenencia a conjunto">∈</button>
-        <button onclick="insertarSimbolo('notin')" title="No pertenencia a conjunto">∉</button>
-        <button onclick="insertarSimbolo('union')" title="Unión de conjuntos">∪</button>
-        <button onclick="insertarSimbolo('intersection')" title="Intersección de conjuntos">∩</button>
-        <button onclick="insertarSimbolo('{x | ...}')" title="Notación de conjuntos">{x | ...}</button>
-        <button onclick="insertarSimbolo('nCr')" title="Combinatoria nCr">nCr</button>
-        <button onclick="insertarSimbolo('nPr')" title="Combinatoria nPr">nPr</button>
-        <button onclick="insertarSimbolo('°')" title="Ángulos en grados">°</button>
-        <button onclick="insertarSimbolo('f(x)')" title="Función de distribución">f(x)</button>
-        <button onclick="insertarSimbolo('P(X=x)')" title="Función de probabilidad">P(X=x)</button>
-        <button onclick="insertarSimbolo('mu')" title="Media">μ</button>
-        <button onclick="insertarSimbolo('sigma')" title="Desviación estándar">σ</button>
-        <button onclick="insertarSimbolo('median()')" title="Mediana">mediana</button>
-        <button onclick="insertarSimbolo('mode()')" title="Moda">moda</button>
+        <button onclick="insertarSimbolo('\\+')">+</button>
+        <button onclick="insertarSimbolo('\\-')">−</button>
+        <button onclick="insertarSimbolo('\\times')">×</button>
+        <button onclick="insertarSimbolo('\\div')">÷</button>
+        <button onclick="insertarSimbolo('^')">^</button>
+        <button onclick="insertarSimbolo('\\sqrt')">√</button>
+        <button onclick="insertarSimbolo('\\sqrt[3]{}')">∛</button>
+        <button onclick="insertarSimbolo('\\pi')">π</button>
+        <button onclick="insertarSimbolo('\\sin')">sin</button>
+        <button onclick="insertarSimbolo('\\cos')">cos</button>
+        <button onclick="insertarSimbolo('\\tan')">tan</button>
+        <button onclick="insertarSimbolo('\\csc')">csc</button>
+        <button onclick="insertarSimbolo('\\sec')">sec</button>
+        <button onclick="insertarSimbolo('\\cot')">cot</button>
+        <button onclick="insertarSimbolo('\\ln')">ln</button>
+        <button onclick="insertarSimbolo('\\log')">log</button>
+        <button onclick="insertarSimbolo('e^')">e^</button>
+        <button onclick="insertarSimbolo('!')">!</button>
+        <button onclick="insertarSimbolo('\\sinh')">sinh</button>
+        <button onclick="insertarSimbolo('\\cosh')">cosh</button>
+        <button onclick="insertarSimbolo('\\tanh')">tanh</button>
+        <button onclick="insertarSimbolo('\\partial / \\partial x')">∂/∂x</button>
+        <button onclick="insertarSimbolo('\\int')">∫</button>
+        <button onclick="insertarSimbolo('\\lim')">lim</button>
+        <button onclick="insertarSimbolo('\\sum')">∑</button>
+        <button onclick="insertarSimbolo('\\prod')">∏</button>
+        <button onclick="insertarSimbolo('|')">|</button>
+        <button onclick="insertarSimbolo('(')">(</button>
+        <button onclick="insertarSimbolo(')')">)</button>
+        <button onclick="insertarSimbolo('[')">[</button>
+        <button onclick="insertarSimbolo(']')">]</button>
+        <button onclick="insertarSimbolo('{')">{</button>
+        <button onclick="insertarSimbolo('}')">}</button>
+        <button onclick="insertarSimbolo('\\lor')">∨</button>
+        <button onclick="insertarSimbolo('\\land')">∧</button>
+        <button onclick="insertarSimbolo('\\neg')">¬</button>
+        <button onclick="insertarSimbolo('=')">=</button>
+        <button onclick="insertarSimbolo('\\neq')">≠</button>
+        <button onclick="insertarSimbolo('<')"><</button>
+        <button onclick="insertarSimbolo('>')">></button>
+        <button onclick="insertarSimbolo('\\leq')">≤</button>
+        <button onclick="insertarSimbolo('\\geq')">≥</button>
     </div>
     <input type="text" id="expresion" placeholder="Ingrese una expresión matemática">
     <button onclick="renderizar()">Mostrar en LaTeX</button>
@@ -122,331 +107,150 @@
         <table>
             <tr>
                 <th>Operación</th>
-                <th>Sintaxis</th>
+                <th>Símbolo</th>
                 <th>Ejemplo</th>
-                <th>Resultado en LaTeX</th>
             </tr>
             <tr>
                 <td>Suma</td>
                 <td>+</td>
-                <td>x + y</td>
                 <td>x + y</td>
             </tr>
             <tr>
                 <td>Resta</td>
                 <td>-</td>
                 <td>x - y</td>
-                <td>x - y</td>
             </tr>
             <tr>
                 <td>Multiplicación</td>
-                <td>*</td>
-                <td>x * y</td>
-                <td>x \cdot y</td>
+                <td>×</td>
+                <td>x × y</td>
             </tr>
             <tr>
                 <td>División</td>
-                <td>/</td>
-                <td>x / y</td>
-                <td>\frac{x}{y}</td>
+                <td>÷</td>
+                <td>x ÷ y</td>
             </tr>
             <tr>
                 <td>Potencia</td>
                 <td>^</td>
-                <td>x ^ y</td>
-                <td>x ^ y</td>
+                <td>x^y</td>
             </tr>
             <tr>
-                <td>Raíz cuadrada</td>
-                <td>sqrt()</td>
-                <td>sqrt(x)</td>
-                <td>\sqrt{x}</td>
+                <td>Raíz Cuadrada</td>
+                <td>√</td>
+                <td>√x</td>
             </tr>
             <tr>
-                <td>Raíz enésima</td>
-                <td>root(n, x)</td>
-                <td>root(3, x)</td>
-                <td>\sqrt[3]{x}</td>
+                <td>Raíz Cúbica</td>
+                <td>∛</td>
+                <td>∛x</td>
             </tr>
             <tr>
                 <td>Pi</td>
-                <td>pi</td>
-                <td>pi</td>
-                <td>\pi</td>
+                <td>π</td>
+                <td>π</td>
             </tr>
             <tr>
                 <td>Seno</td>
-                <td>sin()</td>
-                <td>sin(x)</td>
-                <td>\sin{x}</td>
+                <td>sin</td>
+                <td>sin x</td>
             </tr>
             <tr>
                 <td>Coseno</td>
-                <td>cos()</td>
-                <td>cos(x)</td>
-                <td>\cos{x}</td>
+                <td>cos</td>
+                <td>cos x</td>
             </tr>
             <tr>
                 <td>Tangente</td>
-                <td>tan()</td>
-                <td>tan(x)</td>
-                <td>\tan{x}</td>
+                <td>tan</td>
+                <td>tan x</td>
             </tr>
             <tr>
                 <td>Cosecante</td>
-                <td>csc()</td>
-                <td>csc(x)</td>
-                <td>\csc{x}</td>
+                <td>csc</td>
+                <td>csc x</td>
             </tr>
             <tr>
                 <td>Secante</td>
-                <td>sec()</td>
-                <td>sec(x)</td>
-                <td>\sec{x}</td>
+                <td>sec</td>
+                <td>sec x</td>
             </tr>
             <tr>
                 <td>Cotangente</td>
-                <td>cot()</td>
-                <td>cot(x)</td>
-                <td>\cot{x}</td>
+                <td>cot</td>
+                <td>cot x</td>
             </tr>
             <tr>
-                <td>Logaritmo natural</td>
-                <td>ln()</td>
-                <td>ln(x)</td>
-                <td>\ln{x}</td>
-            </tr>
-            <tr>
-                <td>Logaritmo base 10</td>
-                <td>log()</td>
-                <td>log(x)</td>
-                <td>\log{x}</td>
-            </tr>
-            <tr>
-                <td>Exponencial</td>
-                <td>exp(x)</td>
-                <td>exp(x)</td>
-                <td>e^x</td>
-            </tr>
-            <tr>
-                <td>Factorial</td>
-                <td>!</td>
-                <td>n!</td>
-                <td>n!</td>
-            </tr>
-            <tr>
-                <td>Derivada</td>
-                <td>diff(, x)</td>
-                <td>diff(f(x), x)</td>
-                <td>\frac{d}{dx}f(x)</td>
+                <td>Logaritmo Natural</td>
+                <td>ln</td>
+                <td>ln x</td>
             </tr>
             <tr>
                 <td>Integral</td>
-                <td>integrate(, x)</td>
-                <td>integrate(f(x), x)</td>
-                <td>\int f(x)dx</td>
-            </tr>
-            <tr>
-                <td>Límite</td>
-                <td>limit(, x, )</td>
-                <td>limit(f(x), x, 0)</td>
-                <td>\lim_{x \to 0}f(x)</td>
+                <td>∫</td>
+                <td>∫ f(x) dx</td>
             </tr>
             <tr>
                 <td>Sumatoria</td>
-                <td>sum(, )</td>
-                <td>sum(x, 1, 10)</td>
-                <td>\sum_{x=1}^{10} x</td>
+                <td>∑</td>
+                <td>∑ x</td>
             </tr>
             <tr>
-                <td>Producto</td>
-                <td>product(, )</td>
-                <td>product(x, 1, 10)</td>
-                <td>\prod_{x=1}^{10} x</td>
-            </tr>
-            <tr>
-                <td>Módulo</td>
-                <td>abs()</td>
-                <td>abs(x)</td>
-                <td>|x|</td>
-            </tr>
-            <tr>
-                <td>Vector</td>
-                <td>[a, b]</td>
-                <td>[1, 2]</td>
-                <td>\begin{bmatrix} 1 \\ 2 \end{bmatrix}</td>
-            </tr>
-            <tr>
-                <td>Matriz</td>
-                <td>[[a, b], [c, d]]</td>
-                <td>[[1, 2], [3, 4]]</td>
-                <td>\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}</td>
-            </tr>
-            <tr>
-                <td>Notación científica</td>
-                <td>E</td>
-                <td>1.2E3</td>
-                <td>1.2 \times 10^3</td>
-            </tr>
-            <tr>
-                <td>Constante e</td>
-                <td>e</td>
-                <td>2*e</td>
-                <td>2e</td>
-            </tr>
-            <tr>
-                <td>Número áureo</td>
-                <td>phi</td>
-                <td>phi</td>
-                <td>\phi</td>
-            </tr>
-            <tr>
-                <td>Función definida por partes</td>
-                <td>piecewise([(a, x<0), (b, x>=0)])</td>
-                <td>piecewise([(1, x<0), (0, x>=0)])</td>
-                <td>\begin{cases} 1 & x < 0 \\ 0 & x \geq 0 \end{cases}</td>
-            </tr>
-            <tr>
-                <td>Pertenencia a conjunto</td>
-                <td>in</td>
-                <td>x in A</td>
-                <td>x \in A</td>
-            </tr>
-            <tr>
-                <td>No pertenencia a conjunto</td>
-                <td>notin</td>
-                <td>x notin A</td>
-                <td>x \notin A</td>
-            </tr>
-            <tr>
-                <td>Unión de conjuntos</td>
-                <td>union</td>
-                <td>A union B</td>
-                <td>A \cup B</td>
-            </tr>
-            <tr>
-                <td>Intersección de conjuntos</td>
-                <td>intersection</td>
-                <td>A intersection B</td>
-                <td>A \cap B</td>
-            </tr>
-            <tr>
-                <td>Notación de conjuntos</td>
-                <td>{x | ...}</td>
-                <td>{x | x > 0}</td>
-                <td>\{x | x > 0\}</td>
-            </tr>
-            <tr>
-                <td>Combinatoria nCr</td>
-                <td>nCr</td>
-                <td>nCr(5, 2)</td>
-                <td>{5 \choose 2}</td>
-            </tr>
-            <tr>
-                <td>Combinatoria nPr</td>
-                <td>nPr</td>
-                <td>nPr(5, 2)</td>
-                <td>P(5, 2)</td>
-            </tr>
-            <tr>
-                <td>Ángulos en grados</td>
-                <td>°</td>
-                <td>90°</td>
-                <td>90^\circ</td>
-            </tr>
-            <tr>
-                <td>Función de distribución</td>
-                <td>f(x)</td>
-                <td>f(x)</td>
-                <td>f(x)</td>
-            </tr>
-            <tr>
-                <td>Función de probabilidad</td>
-                <td>P(X=x)</td>
-                <td>P(X=0)</td>
-                <td>P(X=0)</td>
-            </tr>
-            <tr>
-                <td>Media</td>
-                <td>mu</td>
-                <td>mu</td>
-                <td>\mu</td>
-            </tr>
-            <tr>
-                <td>Desviación estándar</td>
-                <td>sigma</td>
-                <td>sigma</td>
-                <td>\sigma</td>
-            </tr>
-            <tr>
-                <td>Mediana</td>
-                <td>median()</td>
-                <td>median(data)</td>
-                <td>\text{mediana}</td>
-            </tr>
-            <tr>
-                <td>Moda</td>
-                <td>mode()</td>
-                <td>mode(data)</td>
-                <td>\text{moda}</td>
+                <td>Límite</td>
+                <td>lim</td>
+                <td>lim x→∞ f(x)</td>
             </tr>
         </table>
     </div>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-<script>
-    function insertarSimbolo(simbolo) {
-        const input = document.getElementById('expresion');
-        const startPos = input.selectionStart;
-        const endPos = input.selectionEnd;
-        const textoActual = input.value;
-        const textoAntes = textoActual.substring(0, startPos);
-        const textoDespues = textoActual.substring(endPos, textoActual.length);
-        input.value = textoAntes + simbolo + textoDespues;
-        input.focus();
-        input.selectionStart = input.selectionEnd = startPos + simbolo.length;
-    }
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script>
+        function insertarSimbolo(simbolo) {
+            const input = document.getElementById('expresion');
+            const startPos = input.selectionStart;
+            const endPos = input.selectionEnd;
+            const textoActual = input.value;
+            const textoAntes = textoActual.substring(0, startPos);
+            const textoDespues = textoActual.substring(endPos, textoActual.length);
+            input.value = textoAntes + simbolo + textoDespues;
+            input.focus();
+            input.selectionStart = input.selectionEnd = startPos + simbolo.length;
+        }
 
-    function renderizar() {
-        const expresion = document.getElementById('expresion').value;
-        fetch('/renderizar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({expresion: expresion}),
-        })
-        .then(response => response.json())
-        .then(data => {
+        function renderizar() {
+            const expresion = document.getElementById('expresion').value;
             const resultadoDiv = document.getElementById('resultado');
-            if (data.success) {
-                resultadoDiv.innerHTML = `\\[${data.latex}\\]`;
-                MathJax.typeset();
-            } else {
-                resultadoDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+            try {
+                resultadoDiv.innerHTML = `\\[${expresion}\\]`;
+                MathJax.typeset([resultadoDiv]);
+            } catch (error) {
+                resultadoDiv.innerHTML = `<span class="error">${error.message}</span>`;
             }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            document.getElementById('resultado').innerHTML = `<p class="error">Error de conexión</p>`;
-        });
-    }
+        }
 
-    function copiarComoImagen() {
-        const resultadoDiv = document.getElementById('resultado');
-        html2canvas(resultadoDiv).then(canvas => {
-            canvas.toBlob(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'expresion.png';
-                a.click();
+        function copiarComoImagen() {
+            const resultadoDiv = document.getElementById('resultado');
+            html2canvas(resultadoDiv).then(canvas => {
+                canvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'expresion.png';
+                    a.click();
+                });
             });
-        });
-    }
-</script>
+        }
 
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
 </body>
 </html>

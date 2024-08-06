@@ -7,7 +7,40 @@ app = Flask(__name__)
 def preprocesar_expresion(expresion):
     # Reemplaza los operadores de potencia
     expresion = expresion.replace('^', '**')
-    
+
+    # Reemplaza símbolos comunes por su equivalente en sympy
+    simbolos = {
+        '×': '*',
+        '÷': '/',
+        '√': 'sqrt',
+        'π': 'pi',
+        'sin': 'sin',
+        'cos': 'cos',
+        'tan': 'tan',
+        'csc': 'csc',
+        'sec': 'sec',
+        'cot': 'cot',
+        'ln': 'log',
+        'log': 'log',
+        'e^': 'exp',
+        'sinh': 'sinh',
+        'cosh': 'cosh',
+        'tanh': 'tanh',
+        '∂/∂x': 'diff',
+        '∫': 'integrate',
+        'lim': 'limit',
+        '∑': 'Sum',
+        '∏': 'Product',
+        '∨': 'or',
+        '∧': 'and',
+        '¬': 'not',
+        '≠': '!=',
+        '≤': '<=',
+        '≥': '>='
+    }
+    for simbolo, reemplazo in simbolos.items():
+        expresion = expresion.replace(simbolo, reemplazo)
+
     # Añadir multiplicación explícita
     expresion = re.sub(r'(\d)([a-zA-Z(])', r'\1*\2', expresion)
     expresion = re.sub(r'([a-zA-Z)])(\d)', r'\1*\2', expresion)
