@@ -5,181 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor de Ecuaciones</title>
     <style>
-body {
-    font-family: 'Roboto', Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f0f4f8;
-    color: #333;
-    line-height: 1.6;
-}
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-}
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
 
-.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
-    justify-content: center; /* Centra los botones horizontalmente */
-}
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center; 
+        }
 
-button {
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-}
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            font-size: 14px;
+            position: relative;
+            outline: none;
+            box-shadow: none;
+            
+        }
 
-button:hover {
-    background-color: #2980b9;
-}
+        button:hover {
+            background-color: #2980b9;
+        }
 
-#expresion {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+        button:active {
+            transform: scale(0.95);
+        }
 
-#resultado {
-    margin-top: 30px;
-    text-align: center;
-    background-color: #ecf0f1;
-    padding: 20px;
-    border-radius: 4px;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        button::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px , 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+            box-shadow: none;
+        }
 
-.copy-button-container {
-    margin-top: 20px;
-    text-align: center;
-}
+        button:hover::after {
+            opacity: 1;
+        }
 
-.help-section {
-    margin-top: 40px;
-    background-color: #e8f4fd;
-    padding: 20px;
-    border-radius: 4px;
-}
+        #expresion {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-.help-section h2 {
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
+        #resultado {
+            margin-top: 30px;
+            text-align: center;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 4px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background-color: #ffffff;
-}
+        .copy-button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-th, td {
-    border: 1px solid #bdc3c7;
-    padding: 12px;
-    text-align: left;
-}
+        .help-section {
+            margin-top: 40px;
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 4px;
+        }
 
-th {
-    background-color: #3498db;
-    color: #ffffff;
-}
+        .help-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #ffffff;
+        }
 
-.error {
-    color: #e74c3c;
-    font-weight: bold;
-}
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px;
+            text-align: left;
+        }
 
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
-    }
-    
-    .container {
-        padding: 15px;
-    }
-    
-    button {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-}
+        th {
+            background-color: #3498db;
+            color: #ffffff;
+        }
 
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+        
     </style>
 </head>
 <body>
     <div class="button-container">
-        <button onclick="insertarSimbolo('\\+')">+</button>
-        <button onclick="insertarSimbolo('\\-')">−</button>
-        <button onclick="insertarSimbolo('\\times')">×</button>
-        <button onclick="insertarSimbolo('\\div')">÷</button>
-        <button onclick="insertarSimbolo('^')">^</button>
-        <button onclick="insertarSimbolo('\\sqrt')">√</button>
-        <button onclick="insertarSimbolo('\\sqrt[3]{}')">∛</button>
-        <button onclick="insertarSimbolo('\\pi')">π</button>
-        <button onclick="insertarSimbolo('\\sin\(\)')">sin</button>
-        <button onclick="insertarSimbolo('\\cos\(\)')">cos</button>
-        <button onclick="insertarSimbolo('\\tan\(\)')">tan</button>
-        <button onclick="insertarSimbolo('\\csc\(\)')">csc</button>
-        <button onclick="insertarSimbolo('\\sec\(\)')">sec</button>
-        <button onclick="insertarSimbolo('\\cot\(\)')">cot</button>
-        <button onclick="insertarSimbolo('\\ln')">ln</button>
-        <button onclick="insertarSimbolo('\\log_{b}(x)')">log<sub>b</sub>(x)</button>
-        <button onclick="insertarSimbolo('e^')">e^</button>
-        <button onclick="insertarSimbolo('!')">!</button>
-        <button onclick="insertarSimbolo('\\sinh')">sinh</button>
-        <button onclick="insertarSimbolo('\\cosh')">cosh</button>
-        <button onclick="insertarSimbolo('\\tanh')">tanh</button>
-        <button onclick="insertarSimbolo('\\partial / \\partial x')">∂/∂x</button>
-        <button onclick="insertarSimbolo('\\int')">∫</button>
-        <button onclick="insertarSimbolo('\\lim')">lim</button>
-        <button onclick="insertarSimbolo('\\sum')">∑</button>
-        <button onclick="insertarSimbolo('\\prod_{i=1}^{n}')">∏<sub>i=1</sub><sup>n</sup></button>
-        <button onclick="insertarSimbolo('|')">|</button>
-        <button onclick="insertarSimbolo('(')">(</button>
-        <button onclick="insertarSimbolo(')')">)</button>
-        <button onclick="insertarSimbolo('[')">[</button>
-        <button onclick="insertarSimbolo(']')">]</button>
-        <button onclick="insertarSimbolo('{')">{</button>
-        <button onclick="insertarSimbolo('}')">}</button>
-        <button onclick="insertarSimbolo('\\lor')">∨</button>
-        <button onclick="insertarSimbolo('\\land')">∧</button>
-        <button onclick="insertarSimbolo('\\neg')">¬</button>
-        <button onclick="insertarSimbolo('=')">=</button>
-        <button onclick="insertarSimbolo('\\neq')">≠</button>
-        <button onclick="insertarSimbolo('<')"><</button>
-        <button onclick="insertarSimbolo('>')">></button>
-        <button onclick="insertarSimbolo('\\leq')">≤</button>
-        <button onclick="insertarSimbolo('\\geq')">≥</button>
+        <button onclick="insertarSimbolo('\\+')" title="Suma">+</button>
+        <button onclick="insertarSimbolo('\\-')" title="Resta">−</button>
+        <button onclick="insertarSimbolo('\\times')" title="Multiplicación">×</button>
+        <button onclick="insertarSimbolo('\\div')" title="División">÷</button>
+        <button onclick="insertarSimbolo('^')" title="Potencia">^</button>
+        <button onclick="insertarSimbolo('\\sqrt')" title="Raíz Cuadrada">√</button>
+        <button onclick="insertarSimbolo('\\sqrt[3]{}')" title="Raíz Cúbica">∛</button>
+        <button onclick="insertarSimbolo('\\pi')" title="Pi">π</button>
+        <button onclick="insertarSimbolo('\\sin\\(\\)')" title="Seno">sin</button>
+        <button onclick="insertarSimbolo('\\cos\\(\\)')" title="Coseno">cos</button>
+        <button onclick="insertarSimbolo('\\tan\\(\\)')" title="Tangente">tan</button>
+        <button onclick="insertarSimbolo('\\csc\\(\\)')" title="Cosecante">csc</button>
+        <button onclick="insertarSimbolo('\\sec\\(\\)')" title="Secante">sec</button>
+        <button onclick="insertarSimbolo('\\cot\\(\\)')" title="Cotangente">cot</button>
+        <button onclick="insertarSimbolo('\\ln')" title="Logaritmo Natural">ln</button>
+        <button onclick="insertarSimbolo('\\log_{b}(x)')" title="Logaritmo">log<sub>b</sub>(x)</button>
+        <button onclick="insertarSimbolo('e^')" title="Exponencial">e^</button>
+        <button onclick="insertarSimbolo('!')" title="Factorial">!</button>
+        <button onclick="insertarSimbolo('\\sinh')" title="Seno Hiperbólico">sinh</button>
+        <button onclick="insertarSimbolo('\\cosh')" title="Coseno Hiperbólico">cosh</button>
+        <button onclick="insertarSimbolo('\\tanh')" title="Tangente Hiperbólica">tanh</button>
+        <button onclick="insertarSimbolo('\\partial / \\partial x')" title="Derivada Parcial">∂/∂x</button>
+        <button onclick="insertarSimbolo('\\int')" title="Integral">∫</button>
+        <button onclick="insertarSimbolo('\\lim')" title="Límite">lim</button>
+        <button onclick="insertarSimbolo('\\sum')" title="Sumatoria">∑</button>
+        <button onclick="insertarSimbolo('\\prod_{i=1}^{n}')" title="Productoria">∏<sub>i=1</sub><sup>n</sup></button>
+        <button onclick="insertarSimbolo('|')" title="Valor Absoluto">|</button>
+        <button onclick="insertarSimbolo('(')" title="Paréntesis Izquierdo">(</button>
+        <button onclick="insertarSimbolo(')')" title="Paréntesis Derecho">)</button>
+        <button onclick="insertarSimbolo('[')" title="Corchete Izquierdo">[</button>
+        <button onclick="insertarSimbolo(']')" title="Corchete Derecho">]</button>
+        <button onclick="insertarSimbolo('{')" title="Llave Izquierda">{</button>
+        <button onclick="insertarSimbolo('}')" title="Llave Derecha">}</button>
+        <button onclick="insertarSimbolo('\\lor')" title="Disyunción">∨</button>
+        <button onclick="insertarSimbolo('\\land')" title="Conjunción">∧</button>
+        <button onclick="insertarSimbolo('\\neg')" title="Negación">¬</button>
+        <button onclick="insertarSimbolo('=')" title="Igualdad">=</button>
+        <button onclick="insertarSimbolo('\\neq')" title="Desigualdad">≠</button>
+        <button onclick="insertarSimbolo('<')" title="Menor Que"><</button>
+        <button onclick="insertarSimbolo('>')" title="Mayor Que">></button>
+        <button onclick="insertarSimbolo('\\leq')" title="Menor o Igual Que">≤</button>
+        <button onclick="insertarSimbolo('\\geq')" title="Mayor o Igual Que">≥</button>
     </div>
     <input type="text" id="expresion" placeholder="Ingrese una expresión matemática">
     <button onclick="renderizar()">Mostrar en LaTeX</button>
@@ -294,47 +325,82 @@ tr:nth-child(even) {
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
+        
+
         function insertarSimbolo(simbolo) {
-            const input = document.getElementById('expresion');
-            const startPos = input.selectionStart;
-            const endPos = input.selectionEnd;
-            const textoActual = input.value;
-            const textoAntes = textoActual.substring(0, startPos);
-            const textoDespues = textoActual.substring(endPos, textoActual.length);
-            input.value = textoAntes + simbolo + textoDespues;
-            input.focus();
-            input.selectionStart = input.selectionEnd = startPos + simbolo.length;
+          const input = document.getElementById('expresion');
+          const startPos = input.selectionStart;
+          const endPos = input.selectionEnd;
+          const textoActual = input.value;
+          const textoAntes = textoActual.substring(0, startPos);
+          const textoDespues = textoActual.substring(endPos, textoActual.length);
+          input.value = textoAntes + simbolo + textoDespues;
+          input.focus();
+          input.selectionStart = input.selectionEnd = startPos + simbolo.length;
         }
-
+      
         function renderizar() {
-            const expresion = document.getElementById('expresion').value;
-            const resultadoDiv = document.getElementById('resultado');
-            try {
-                resultadoDiv.innerHTML = `\\[${expresion}\\]`;
-                MathJax.typesetPromise([resultadoDiv]).catch((err) => {
-                    resultadoDiv.innerHTML = `<span class="error">${err.message}</span>`;
-                });
-            } catch (error) {
-                resultadoDiv.innerHTML = `<span class="error">${error.message}</span>`;
-            }
+          const expresion = document.getElementById('expresion').value;
+          const resultadoDiv = document.getElementById('resultado');
+          try {
+            resultadoDiv.innerHTML = `\\[${expresion}\\]`;
+            MathJax.typesetPromise([resultadoDiv]).catch((err) => {
+              resultadoDiv.innerHTML = `<span class="error">${err.message}</span>`;
+            });
+          } catch (error) {
+            resultadoDiv.innerHTML = `<span class="error">${error.message}</span>`;
+          }
         }
-
+      
+ 
         function copiarComoImagen() {
-            const mjxContainer = document.querySelector('#resultado mjx-container');
-            if (mjxContainer) {
-                html2canvas(mjxContainer).then(canvas => {
-                    canvas.toBlob(blob => {
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'expresion.png';
-                        a.click();
-                    });
+    const resultadoDiv = document.getElementById('resultado');
+    html2canvas(resultadoDiv, {
+        backgroundColor: null,
+        scale: 2  // Aumenta la escala para mejorar la calidad
+    }).then(canvas => {
+        canvas.toBlob(blob => {
+            // Para navegadores modernos
+            if (navigator.clipboard && navigator.clipboard.write) {
+                navigator.clipboard.write([
+                    new ClipboardItem({'image/png': blob})
+                ]).then(() => {
+                    alert("Imagen copiada al portapapeles");
+                }).catch(err => {
+                    console.error("Error al copiar la imagen: ", err);
+                    fallbackCopyMethod(canvas);
                 });
             } else {
-                alert('No hay contenido para copiar.');
+                // Método alternativo para navegadores que no soportan navigator.clipboard.write
+                fallbackCopyMethod(canvas);
             }
-        }
+        }, 'image/png');
+    }).catch(error => {
+        console.error("Error al crear la imagen: ", error);
+        alert("No se pudo crear la imagen. Por favor, intente nuevamente.");
+    });
+}
+
+function fallbackCopyMethod(canvas) {
+    canvas.toBlob(blob => {
+        const item = new ClipboardItem({ "image/png": blob });
+        navigator.clipboard.write([item]).then(() => {
+            alert("Imagen copiada al portapapeles");
+        }).catch(err => {
+            console.error("Error al copiar la imagen: ", err);
+            const img = canvas.toDataURL("image/png");
+            promptToCopyImage(img);
+        });
+    });
+}
+
+function promptToCopyImage(dataUrl) {
+    const newTab = window.open();
+    newTab.document.body.innerHTML = `
+        <img src="${dataUrl}" alt="Ecuación">
+        <p>Por favor, haga clic derecho en la imagen y seleccione "Copiar imagen" para copiarla al portapapeles.</p>
+    `;
+}
 
         window.MathJax = {
             tex: {
@@ -349,7 +415,8 @@ tr:nth-child(even) {
                 }
             }
         };
-    </script>
+      </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
 </body>
 </html>
