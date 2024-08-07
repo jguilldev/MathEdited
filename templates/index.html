@@ -28,6 +28,11 @@
         }
         #resultado {
             margin-top: 20px;
+            text-align: center;
+        }
+        .copy-button-container {
+            margin-top: 20px;
+            text-align: center;
         }
         .help-section {
             margin-top: 40px;
@@ -60,14 +65,14 @@
         <button onclick="insertarSimbolo('\\sqrt')">√</button>
         <button onclick="insertarSimbolo('\\sqrt[3]{}')">∛</button>
         <button onclick="insertarSimbolo('\\pi')">π</button>
-        <button onclick="insertarSimbolo('\\sin')">sin</button>
-        <button onclick="insertarSimbolo('\\cos')">cos</button>
-        <button onclick="insertarSimbolo('\\tan')">tan</button>
-        <button onclick="insertarSimbolo('\\csc')">csc</button>
-        <button onclick="insertarSimbolo('\\sec')">sec</button>
-        <button onclick="insertarSimbolo('\\cot')">cot</button>
+        <button onclick="insertarSimbolo('\\sin\\(\\)')">sin</button>
+        <button onclick="insertarSimbolo('\\cos\\(\\)')">cos</button>
+        <button onclick="insertarSimbolo('\\tan\\(\\)')">tan</button>
+        <button onclick="insertarSimbolo('\\csc\\(\\)')">csc</button>
+        <button onclick="insertarSimbolo('\\sec\\(\\)')">sec</button>
+        <button onclick="insertarSimbolo('\\cot\\(\\)')">cot</button>
         <button onclick="insertarSimbolo('\\ln')">ln</button>
-        <button onclick="insertarSimbolo('\\log')">log</button>
+        <button onclick="insertarSimbolo('\\log_{b}(x)')">log<sub>b</sub>(x)</button>
         <button onclick="insertarSimbolo('e^')">e^</button>
         <button onclick="insertarSimbolo('!')">!</button>
         <button onclick="insertarSimbolo('\\sinh')">sinh</button>
@@ -77,7 +82,7 @@
         <button onclick="insertarSimbolo('\\int')">∫</button>
         <button onclick="insertarSimbolo('\\lim')">lim</button>
         <button onclick="insertarSimbolo('\\sum')">∑</button>
-        <button onclick="insertarSimbolo('\\prod')">∏</button>
+        <button onclick="insertarSimbolo('\\prod_{i=1}^{n}')">∏<sub>i=1</sub><sup>n</sup></button>
         <button onclick="insertarSimbolo('|')">|</button>
         <button onclick="insertarSimbolo('(')">(</button>
         <button onclick="insertarSimbolo(')')">)</button>
@@ -97,8 +102,10 @@
     </div>
     <input type="text" id="expresion" placeholder="Ingrese una expresión matemática">
     <button onclick="renderizar()">Mostrar en LaTeX</button>
-    <button onclick="copiarComoImagen()">Copiar como Imagen</button>
     <div id="resultado"></div>
+    <div class="copy-button-container">
+        <button onclick="copiarComoImagen()">Copiar como Imagen</button>
+    </div>
 
     <div class="help-section">
         <h2>Guía de Sintaxis para el Editor de Ecuaciones</h2>
@@ -204,7 +211,6 @@
     </div>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
         function insertarSimbolo(simbolo) {
@@ -224,33 +230,45 @@
             const resultadoDiv = document.getElementById('resultado');
             try {
                 resultadoDiv.innerHTML = `\\[${expresion}\\]`;
-                MathJax.typeset([resultadoDiv]);
+                MathJax.typesetPromise([resultadoDiv]).catch((err) => {
+                    resultadoDiv.innerHTML = `<span class="error">${err.message}</span>`;
+                });
             } catch (error) {
                 resultadoDiv.innerHTML = `<span class="error">${error.message}</span>`;
             }
         }
 
         function copiarComoImagen() {
-            const resultadoDiv = document.getElementById('resultado');
-            html2canvas(resultadoDiv).then(canvas => {
-                canvas.toBlob(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'expresion.png';
-                    a.click();
+            const mjxContainer = document.querySelector('#resultado mjx-container');
+            if (mjxContainer) {
+                html2canvas(mjxContainer).then(canvas => {
+                    canvas.toBlob(blob => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'expresion.png';
+                        a.click();
+                    });
                 });
-            });
+            } else {
+                alert('No hay contenido para copiar.');
+            }
         }
 
-        MathJax = {
+        window.MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
+                inlineMath: [['\\(', '\\)']]
             },
-            svg: {
-                fontCache: 'global'
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    MathJax.typesetPromise().then(() => {
+                        console.log("MathJax typeset complete.");
+                    }).catch((err) => console.log(err.message));
+                }
             }
         };
     </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>
