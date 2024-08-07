@@ -5,54 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor de Ecuaciones</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .button-container {
-            margin-bottom: 10px;
-        }
-        button {
-            margin-right: 5px;
-            margin-bottom: 5px;
-            padding: 5px 10px;
-        }
-        #expresion {
-            width: calc(100% - 12px);
-            margin-bottom: 10px;
-            padding: 5px;
-            font-size: 16px;
-        }
-        #resultado {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .copy-button-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .help-section {
-            margin-top: 40px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .error {
-            color: red;
-        }
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center; /* Centra los botones horizontalmente */
+}
+
+button {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#expresion {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#resultado {
+    margin-top: 30px;
+    text-align: center;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 4px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.help-section {
+    margin-top: 40px;
+    background-color: #e8f4fd;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.help-section h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #ffffff;
+}
+
+th, td {
+    border: 1px solid #bdc3c7;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -65,12 +146,12 @@
         <button onclick="insertarSimbolo('\\sqrt')">√</button>
         <button onclick="insertarSimbolo('\\sqrt[3]{}')">∛</button>
         <button onclick="insertarSimbolo('\\pi')">π</button>
-        <button onclick="insertarSimbolo('\\sin\\(\\)')">sin</button>
-        <button onclick="insertarSimbolo('\\cos\\(\\)')">cos</button>
-        <button onclick="insertarSimbolo('\\tan\\(\\)')">tan</button>
-        <button onclick="insertarSimbolo('\\csc\\(\\)')">csc</button>
-        <button onclick="insertarSimbolo('\\sec\\(\\)')">sec</button>
-        <button onclick="insertarSimbolo('\\cot\\(\\)')">cot</button>
+        <button onclick="insertarSimbolo('\\sin\(\)')">sin</button>
+        <button onclick="insertarSimbolo('\\cos\(\)')">cos</button>
+        <button onclick="insertarSimbolo('\\tan\(\)')">tan</button>
+        <button onclick="insertarSimbolo('\\csc\(\)')">csc</button>
+        <button onclick="insertarSimbolo('\\sec\(\)')">sec</button>
+        <button onclick="insertarSimbolo('\\cot\(\)')">cot</button>
         <button onclick="insertarSimbolo('\\ln')">ln</button>
         <button onclick="insertarSimbolo('\\log_{b}(x)')">log<sub>b</sub>(x)</button>
         <button onclick="insertarSimbolo('e^')">e^</button>
