@@ -35,7 +35,11 @@
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 20px;
-            justify-content: center; 
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         button {
@@ -50,7 +54,6 @@
             position: relative;
             outline: none;
             box-shadow: none;
-            
         }
 
         button:hover {
@@ -110,6 +113,15 @@
             text-align: center;
         }
 
+        .latex-preview {
+            margin-top: 20px;
+        }
+
+        .latex-preview img {
+            max-width: 100%;
+            height: auto;
+        }
+
         .help-section {
             margin-top: 40px;
             background-color: #e8f4fd;
@@ -149,12 +161,14 @@
             font-weight: bold;
         }
 
+        
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
             }
             
-            .container {
+            .container, .button-container {
                 padding: 15px;
             }
             
@@ -163,12 +177,10 @@
                 font-size: 12px;
             }
         }
-
-        
     </style>
 </head>
 <body>
-    <div class="button-container">
+    <div class="container button-container">
         <button onclick="insertarSimbolo('\\+')" title="Suma">+</button>
         <button onclick="insertarSimbolo('\\-')" title="Resta">−</button>
         <button onclick="insertarSimbolo('\\times')" title="Multiplicación">×</button>
@@ -212,211 +224,142 @@
         <button onclick="insertarSimbolo('\\leq')" title="Menor o Igual Que">≤</button>
         <button onclick="insertarSimbolo('\\geq')" title="Mayor o Igual Que">≥</button>
     </div>
-    <input type="text" id="expresion" placeholder="Ingrese una expresión matemática">
-    <button onclick="renderizar()">Mostrar en LaTeX</button>
-    <div id="resultado"></div>
-    <div class="copy-button-container">
-        <button onclick="copiarComoImagen()">Copiar como Imagen</button>
+
+    <div class="container">
+        <h1>Editor de Ecuaciones</h1>
+        <textarea id="expresion" rows="4" placeholder="Escribe tu ecuación aquí..."></textarea>
+
+        <div style="display: none;" id="latex-output" class="latex-output">
+            <h3>Código LaTeX:</h3>
+            <pre id="latex-code"></pre>
+        </div>
+
+        <div id="resultado"></div>
+
+        <div class="copy-button-container">
+            
+            <button onclick="copiarImagen()">Copiar al portapapeles</button>
+            <button onclick="descargarImagen()">Descargar Imagen</button>
+        </div>
+
+
+
+        <div class="help-section">
+            <h2>Ayuda para la Sintaxis</h2>
+            <table>
+                <tr>
+                    <th>Operador</th>
+                    <th>Ejemplo</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td>+</td>
+                    <td>a + b</td>
+                    <td>Suma de <em>a</em> y <em>b</em></td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>a - b</td>
+                    <td>Resta de <em>a</em> y <em>b</em></td>
+                </tr>
+                <tr>
+                    <td>*</td>
+                    <td>a * b</td>
+                    <td>Multiplicación de <em>a</em> y <em>b</em></td>
+                </tr>
+                <tr>
+                    <td>/</td>
+                    <td>a / b</td>
+                    <td>División de <em>a</em> por <em>b</em></td>
+                </tr>
+                <tr>
+                    <td>^</td>
+                    <td>a ^ b</td>
+                    <td><em>a</em> elevado a la potencia de <em>b</em></td>
+                </tr>
+                <tr>
+                    <td>sin(x)</td>
+                    <td>sin(pi/2)</td>
+                    <td>Función seno de <em>x</em></td>
+                </tr>
+                <!-- Agrega más filas según sea necesario -->
+            </table>
+        </div>
     </div>
 
-    <div class="help-section">
-        <h2>Guía de Sintaxis para el Editor de Ecuaciones</h2>
-        <p>Utilice la siguiente sintaxis para ingresar expresiones matemáticas:</p>
-        
-        <table>
-            <tr>
-                <th>Operación</th>
-                <th>Símbolo</th>
-                <th>Ejemplo</th>
-            </tr>
-            <tr>
-                <td>Suma</td>
-                <td>+</td>
-                <td>x + y</td>
-            </tr>
-            <tr>
-                <td>Resta</td>
-                <td>-</td>
-                <td>x - y</td>
-            </tr>
-            <tr>
-                <td>Multiplicación</td>
-                <td>×</td>
-                <td>x × y</td>
-            </tr>
-            <tr>
-                <td>División</td>
-                <td>÷</td>
-                <td>x ÷ y</td>
-            </tr>
-            <tr>
-                <td>Potencia</td>
-                <td>^</td>
-                <td>x^y</td>
-            </tr>
-            <tr>
-                <td>Raíz Cuadrada</td>
-                <td>√</td>
-                <td>√x</td>
-            </tr>
-            <tr>
-                <td>Raíz Cúbica</td>
-                <td>∛</td>
-                <td>∛x</td>
-            </tr>
-            <tr>
-                <td>Pi</td>
-                <td>π</td>
-                <td>π</td>
-            </tr>
-            <tr>
-                <td>Seno</td>
-                <td>sin</td>
-                <td>sin x</td>
-            </tr>
-            <tr>
-                <td>Coseno</td>
-                <td>cos</td>
-                <td>cos x</td>
-            </tr>
-            <tr>
-                <td>Tangente</td>
-                <td>tan</td>
-                <td>tan x</td>
-            </tr>
-            <tr>
-                <td>Cosecante</td>
-                <td>csc</td>
-                <td>csc x</td>
-            </tr>
-            <tr>
-                <td>Secante</td>
-                <td>sec</td>
-                <td>sec x</td>
-            </tr>
-            <tr>
-                <td>Cotangente</td>
-                <td>cot</td>
-                <td>cot x</td>
-            </tr>
-            <tr>
-                <td>Logaritmo Natural</td>
-                <td>ln</td>
-                <td>ln x</td>
-            </tr>
-            <tr>
-                <td>Integral</td>
-                <td>∫</td>
-                <td>∫ f(x) dx</td>
-            </tr>
-            <tr>
-                <td>Sumatoria</td>
-                <td>∑</td>
-                <td>∑ x</td>
-            </tr>
-            <tr>
-                <td>Límite</td>
-                <td>lim</td>
-                <td>lim x→∞ f(x)</td>
-            </tr>
-        </table>
-    </div>
-
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
-        
+    function insertarSimbolo(simbolo) {
+    const expresion = document.getElementById('expresion');
+    expresion.value += simbolo;
+    renderizarImagen();
+}
 
-        function insertarSimbolo(simbolo) {
-          const input = document.getElementById('expresion');
-          const startPos = input.selectionStart;
-          const endPos = input.selectionEnd;
-          const textoActual = input.value;
-          const textoAntes = textoActual.substring(0, startPos);
-          const textoDespues = textoActual.substring(endPos, textoActual.length);
-          input.value = textoAntes + simbolo + textoDespues;
-          input.focus();
-          input.selectionStart = input.selectionEnd = startPos + simbolo.length;
-        }
-      
-        function renderizar() {
-          const expresion = document.getElementById('expresion').value;
-          const resultadoDiv = document.getElementById('resultado');
-          try {
-            resultadoDiv.innerHTML = `\\[${expresion}\\]`;
-            MathJax.typesetPromise([resultadoDiv]).catch((err) => {
-              resultadoDiv.innerHTML = `<span class="error">${err.message}</span>`;
-            });
-          } catch (error) {
-            resultadoDiv.innerHTML = `<span class="error">${error.message}</span>`;
-          }
-        }
-      
- 
-        function copiarComoImagen() {
+
+
+function renderizarImagen() {
+    const expresion = document.getElementById('expresion').value;
     const resultadoDiv = document.getElementById('resultado');
-    html2canvas(resultadoDiv, {
-        backgroundColor: null,
-        scale: 2  // Aumenta la escala para mejorar la calidad
-    }).then(canvas => {
-        canvas.toBlob(blob => {
-            // Para navegadores modernos
-            if (navigator.clipboard && navigator.clipboard.write) {
-                navigator.clipboard.write([
-                    new ClipboardItem({'image/png': blob})
-                ]).then(() => {
-                    alert("Imagen copiada al portapapeles");
-                }).catch(err => {
-                    console.error("Error al copiar la imagen: ", err);
-                    fallbackCopyMethod(canvas);
-                });
-            } else {
-                // Método alternativo para navegadores que no soportan navigator.clipboard.write
-                fallbackCopyMethod(canvas);
-            }
-        }, 'image/png');
-    }).catch(error => {
-        console.error("Error al crear la imagen: ", error);
-        alert("No se pudo crear la imagen. Por favor, intente nuevamente.");
-    });
+    const latexCodePre = document.getElementById('latex-code');
+    
+    resultadoDiv.innerHTML = '';  // Limpiar el contenido previo
+    latexCodePre.textContent = expresion;  // Actualizar el código LaTeX visible
+
+    if (expresion.trim() === '') return;
+
+    const img = document.createElement('img');
+    img.src = `https://latex.codecogs.com/png.latex?${encodeURIComponent(expresion)}`;
+    img.alt = 'Imagen de la ecuación generada';
+    resultadoDiv.appendChild(img);
 }
 
-function fallbackCopyMethod(canvas) {
-    canvas.toBlob(blob => {
+function copiarImagen() {
+    const img = document.querySelector('#resultado img');
+    if (!img) {
+        alert("No hay imagen para copiar. Por favor, ingrese una ecuación primero.");
+        return;
+    }
+
+    // Crear un canvas y dibujar la imagen en él
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+
+    // Convertir el canvas a Blob
+    canvas.toBlob(function(blob) {
+        // Crear un nuevo objeto ClipboardItem
         const item = new ClipboardItem({ "image/png": blob });
-        navigator.clipboard.write([item]).then(() => {
+
+        // Intentar escribir en el portapapeles
+        navigator.clipboard.write([item]).then(function() {
             alert("Imagen copiada al portapapeles");
-        }).catch(err => {
-            console.error("Error al copiar la imagen: ", err);
-            const img = canvas.toDataURL("image/png");
-            promptToCopyImage(img);
+        }, function(error) {
+            console.error("Error al copiar la imagen: ", error);
+            alert("No se pudo copiar la imagen. Intente usar el botón derecho del ratón para copiarla manualmente.");
         });
-    });
+    }, 'image/png');
 }
 
-function promptToCopyImage(dataUrl) {
-    const newTab = window.open();
-    newTab.document.body.innerHTML = `
-        <img src="${dataUrl}" alt="Ecuación">
-        <p>Por favor, haga clic derecho en la imagen y seleccione "Copiar imagen" para copiarla al portapapeles.</p>
-    `;
+function descargarImagen() {
+    const img = document.querySelector('#resultado img');
+    if (!img) {
+        alert("No hay imagen para descargar. Por favor, ingrese una ecuación primero.");
+        return;
+    }
+
+    const a = document.createElement('a');
+    a.href = img.src;
+    a.download = 'ecuacion.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
-        window.MathJax = {
-            tex: {
-                inlineMath: [['\\(', '\\)']]
-            },
-            startup: {
-                ready: () => {
-                    MathJax.startup.defaultReady();
-                    MathJax.typesetPromise().then(() => {
-                        console.log("MathJax typeset complete.");
-                    }).catch((err) => console.log(err.message));
-                }
-            }
-        };
-      </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-      
+
+
+document.getElementById('expresion').addEventListener('input', renderizarImagen);;
+
+    </script>
 </body>
 </html>
